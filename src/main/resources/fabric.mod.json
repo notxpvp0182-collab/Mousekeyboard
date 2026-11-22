@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "mousekeyboardhud",
+	"version": "${version}",
+	"name": "Mouse & Keyboard HUD",
+	"description": "Premium dark-glass keyboard and mouse input HUD with split keyboard, HUD editor and ClickGUI.",
+	"authors": [
+		"Ahmed"
+	],
+	"contact": {},
+	"license": "CC0-1.0",
+	"icon": "assets/mousekeyboardhud/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"com.ahmed.mousekeyboardhud.MouseKeyboardHudClient"
+		],
+		"modmenu": [
+			"com.ahmed.mousekeyboardhud.ModMenuIntegration"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.20.1",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {},
+			"badges": [ "client" ]
+		}
+	}
+}
