@@ -1,7 +1,12 @@
 name: Build
 on:
   push:
+    branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,12 +15,22 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 25
       - run: chmod +x gradlew
       - run: ./gradlew build --no-daemon
+      - name: Pick mod jar
+        run: |
+          mkdir -p dist
+          cp $(ls build/libs/*.jar | grep -v -- '-sources') dist/
+          ls dist
       - uses: actions/upload-artifact@v4
         with:
           name: mousekeyboardhud-jar
-          path: |
-            build/libs/*.jar
-            !build/libs/*-sources.jar
+          path: dist/*.jar
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0-build${{ github.run_number }}
+          name: Mouse & Keyboard HUD (MC 1.21.11) build ${{ github.run_number }}
+          body: Fabric mod for Minecraft 1.21.11. Needs Fabric API. Mod Menu optional.
+          files: dist/*.jar
