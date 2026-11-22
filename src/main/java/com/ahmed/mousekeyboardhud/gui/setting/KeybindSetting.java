@@ -65,7 +65,7 @@ public final class KeybindSetting extends Setting {
         InputConstants.Key bound = (key == GLFW.GLFW_KEY_BACKSPACE || key == GLFW.GLFW_KEY_DELETE)
                 ? InputConstants.UNKNOWN
                 : InputConstants.Type.KEYSYM.getOrCreate(key);
-        mc.options.setKey(m, bound);
+        m.setKey(bound);
         KeyMapping.resetMapping();
         mc.options.save();
         return true;
